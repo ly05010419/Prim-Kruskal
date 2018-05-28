@@ -10,38 +10,30 @@ namespace namespaceAlgorithmus
     {
         public void zeitOfAlgorithmus(string path, String methode)
         {
-
-            Console.WriteLine("Prim und Kruskal");
+            Console.WriteLine(methode);
 
             Algorithmus algorithmus = new Algorithmus();
 
-            Graph graph = Parse.getEdgeListByFile(path);
-
-            List<List<Edge>> resultList = new List<List<Edge>>();
+            Graph graph = Parse.getGraphByFile(path);
 
             DateTime befor = System.DateTime.Now;
-
-
-            List<Edge> result = new List<Edge>();
 
             if (methode == "Kruskal")
             {
                 algorithmus.kruskal(graph);
-            }else
+            }
+            else
             {
                 algorithmus.prim(graph);
             }
 
-
-            resultList.Add(result);
-
             DateTime after = System.DateTime.Now;
             TimeSpan ts = after.Subtract(befor);
-            Console.WriteLine("\n\n{0}s.", ts.TotalSeconds);
+            Console.WriteLine("\n\n{0}s", ts.TotalSeconds);
 
-            Console.WriteLine("\n");
-            Console.ReadLine();
+          
         }
+       
 
         public void prim(Graph graph)
         {
@@ -50,32 +42,31 @@ namespace namespaceAlgorithmus
             Node node = graph.nodeList[0];
             node.weight = 0;
 
-            while ((node = findMinNode(graph.nodeList)) != null)
+            while ((node = findMinNode(graph.nodeList))!=null)
             {
-                Console.WriteLine("min:" + node.id);
-                if (node.visited == false)
+                //Console.WriteLine("min:" + node.id);
+
+                foreach (Edge e in node.edgeList)
                 {
-                    foreach (Edge e in node.edgeList)
+                    Node n = e.endNode;
+                    if (n.visited == false)
                     {
-                        Node n = e.endNode;
-                        if (n.visited == false)
+                        if (n.weight > e.weight)
                         {
-                            if (n.weight > e.weight)
-                            {
-                                n.weight = e.weight;
-                            }
+                            n.weight = e.weight;
+                           
                         }
                     }
-                    node.visited = true;
                 }
+                node.visited = true;
+
             }
 
-            float sum = 0;
+            double sum = 0;
 
             foreach (Node n in graph.nodeList)
             {
                 sum = sum + n.weight;
-
                 //Console.WriteLine(n.id + "," + n.weight);
             }
             Console.WriteLine("sum:" + sum);
@@ -108,10 +99,6 @@ namespace namespaceAlgorithmus
 
 
 
-
-       
-
-
         int[] father;
         int[] rank;
 
@@ -122,8 +109,8 @@ namespace namespaceAlgorithmus
 
             for (int i = 0; i < length; i++)
             {
-                father[i] = i; 
-                rank[i] = 0; 
+                father[i] = i;
+                rank[i] = 0;
             }
         }
 
@@ -167,14 +154,14 @@ namespace namespaceAlgorithmus
 
             foreach (Edge edge in graph.edgeList)
             {
-                Console.WriteLine(edge.startNode.id + "-" + edge.endNode.id);
-                if (Union(int.Parse(edge.startNode.id), int.Parse(edge.endNode.id)))
+                //Console.WriteLine(edge.startNode.id + "-" + edge.endNode.id);
+                if (Union(edge.startNode.id, edge.endNode.id))
                 {
                     result.Add(edge);
                 }
             }
 
-            float sum = 0;
+            double sum = 0;
             foreach (Edge e in result)
             {
                 sum = sum + e.weight;
@@ -183,6 +170,6 @@ namespace namespaceAlgorithmus
 
             Console.WriteLine("sum: " + sum);
         }
-        
+
     }
 }

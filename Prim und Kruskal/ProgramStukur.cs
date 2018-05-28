@@ -22,24 +22,26 @@ namespace namespaceStuktur
 
     }
 
-    class Node
+    class Node : IComparable<Node>
     {
-        public String id;
-
-        //public List<Node> nodeList;
+        public int id;
 
         public List<Edge> edgeList;
 
         public bool visited = false;
 
-        public float weight;
+        public double weight;
 
-        public Node(String id)
+        public Node(int id)
         {
             this.id = id;
-            //this.nodeList = new List<Node>();
             this.edgeList = new List<Edge>();
             this.weight = float.MaxValue;
+        }
+
+        public int CompareTo(Node other)
+        {
+            return this.weight.CompareTo(other.weight);
         }
     }
 
@@ -47,16 +49,11 @@ namespace namespaceStuktur
     {
         public Node endNode;
         public Node startNode;
-        public float weight;
+        public double weight;
 
-        public Edge(Node endNode, float weight)
-        {
-            this.endNode = endNode;
+     
 
-            this.weight = weight;
-        }
-
-        public Edge(Node startNode, Node endNode, float weight)
+        public Edge(Node startNode, Node endNode, double weight)
         {
             this.startNode = startNode;
             this.endNode = endNode;

@@ -10,7 +10,7 @@ namespace namespaceUtility
 {
     class Parse
     {
-        public static Graph getEdgeListByFile(string path)
+        public static Graph getGraphByFile(string path)
         {
            
             List<Node> nodeList = new List<Node>();
@@ -47,7 +47,7 @@ namespace namespaceUtility
         static void initNode(int nodeCount,List<Node> nodeList) {
             for (int i = 0; i < nodeCount; i++)
             {
-                Node node = new Node("" + i);
+                Node node = new Node(i);
                 nodeList.Add(node);
             }
         }
@@ -58,13 +58,13 @@ namespace namespaceUtility
         {
             Node vater1 = nodeList[vaterIndex];
             Node son1 = nodeList[sonIndex];
-            Edge edge1 = new Edge(son1,weight);
+            Edge edge1 = new Edge(vater1,son1, weight);
             vater1.edgeList.Add(edge1);
 
 
             Node vater2 = nodeList[sonIndex];
             Node son2 = nodeList[vaterIndex];
-            Edge edge2 = new Edge(son2, weight);
+            Edge edge2 = new Edge(vater2,son2, weight);
             vater2.edgeList.Add(edge2);
 
         }
