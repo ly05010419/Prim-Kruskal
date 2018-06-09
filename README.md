@@ -17,3 +17,8 @@
 > 依次加入最小边
 > 检查有无圈存在
 > 加入所有边后就是最小生成树
+
+
+
+TUM算法详解
+http://www-m9.ma.tum.de/Allgemeines/GraphAlgorithmenEn
