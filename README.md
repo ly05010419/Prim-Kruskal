@@ -22,8 +22,10 @@
 > 3. 检查有无圈存在
 > 4. 加入所有边后就是最小生成树
 
-> 图示
-https://upload.wikimedia.org/wikipedia/commons/b/bb/KruskalDemo.gif
+## 圖示
+
+![GITHUB](https://upload.wikimedia.org/wikipedia/commons/b/bb/KruskalDemo.gif "git圖示")
+
 
 TUM算法详解
 http://www-m9.ma.tum.de/Allgemeines/GraphAlgorithmenEn
